@@ -53,7 +53,7 @@ GAMES = [
         "gallery_dir": "tile-swap-puzzle",
         "play": None,
         "docs": [
-            (t("Gizlilik Politikası", "Privacy Policy"), "https://berqworks.github.io/tile-swap-puzzle/privacy-policy.html", "/tile-swap-puzzle/privacy-policy.html", "update"),
+            (t("Gizlilik Politikası", "Privacy Policy"), "https://berqworks.github.io/tile-swap-puzzle/privacy-policy.html", "/tile-swap-puzzle/privacy-policy.html", "live"),
             (t("Kullanım Koşulları", "Terms of Use"), "https://berqworks.github.io/tile-swap-puzzle/terms-of-use.html", "/tile-swap-puzzle/terms-of-use.html", "live"),
         ],
         "facts": [
