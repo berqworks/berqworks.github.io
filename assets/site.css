@@ -142,3 +142,28 @@ footer.site .wrap { padding-block: 22px; display: flex; justify-content: space-b
   .gallery.portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .game { transition: none; } .game:hover { transform: none; } }
+
+/* Yasal metinler */
+.legal-hero .wrap { display: block; padding-block: 28px; }
+.legal-hero h1 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin-top: 4px; }
+.doc-meta { margin: 8px 0 0; opacity: .8; font-size: .92rem; }
+.legal { min-width: 0; max-width: 72ch; }
+.legal h2 { font-size: 1.15rem; font-weight: 800; margin: 2em 0 .5em; }
+.legal p, .legal li { line-height: 1.7; }
+.legal p { margin: 0 0 1em; }
+.legal ul { padding-left: 1.3em; margin: 0 0 1em; }
+.legal li { margin-bottom: .35em; }
+.legal .lead { font-size: 1.05rem; }
+.legal .summary { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--g-accent); border-radius: 10px; padding: 4px 20px 6px; margin: 1.4em 0; }
+.legal .summary h2 { margin-top: .9em; }
+.legal .note { background: var(--plum-soft); border-radius: 10px; padding: 10px 14px; font-size: .92rem; }
+.legal .table-wrap { overflow-x: auto; margin: 0 0 1em; }
+.legal table { border-collapse: collapse; width: 100%; font-size: .94rem; }
+.legal th, .legal td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.legal th { font-family: var(--f-display); font-weight: 600; }
+.legal td:first-child { white-space: nowrap; font-weight: 600; }
+.legal .email { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .95em; }
+.doc-nav { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.doc-nav a { font-weight: 600; text-decoration: none; }
+.doc-nav a[aria-current] { color: var(--ink); }
+@media (max-width: 520px) { .legal td:first-child { white-space: normal; } }

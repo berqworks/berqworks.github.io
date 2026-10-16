@@ -129,9 +129,9 @@ GAMES = [
         "gallery_dir": "water-sort",
         "play": None,
         "docs": [
-            (t("Gizlilik Politikası", "Privacy Policy"), None, "/games/water-sort/privacy-policy.html", "draft"),
-            (t("Kullanım Koşulları", "Terms of Use"), None, "/games/water-sort/terms-of-use.html", "draft"),
-            (t("KVKK Aydınlatma Metni", "KVKK Notice (Turkey)"), None, "/games/water-sort/kvkk.html", "draft"),
+            (t("Gizlilik Politikası", "Privacy Policy"), "/games/water-sort/privacy-policy.html", "/games/water-sort/privacy-policy.html", "live"),
+            (t("Kullanım Koşulları", "Terms of Use"), "/games/water-sort/terms-of-use.html", "/games/water-sort/terms-of-use.html", "live"),
+            (t("KVKK Aydınlatma Metni", "KVKK Notice (Turkey)"), "/games/water-sort/kvkk.html", "/games/water-sort/kvkk.html", "live"),
         ],
         "facts": [
             (t("Platform", "Platform"), t("Android, telefon ve tablet", "Android, phone and tablet")),
@@ -283,6 +283,41 @@ def page(g):
     return shell(plain(g["name"]) + " · BerqWorks", plain(g["card"]), body, g["icon"])
 
 
+# Bu sitede barındırılan yasal metinler: oyun → (dosya adı, başlık, sürüm, tarih TR, tarih EN).
+# Metinler tools/legal/<oyun>/<dosya>.tr.html ve .en.html; sürüm oyundaki Consent.POLICY_VERSION ile aynı olmalı.
+LEGAL = {
+    "water-sort": [
+        ("privacy-policy", t("Gizlilik Politikası", "Privacy Policy"), 1, "16 Ekim 2026", "16 October 2026"),
+        ("terms-of-use", t("Kullanım Koşulları", "Terms of Use"), 1, "16 Ekim 2026", "16 October 2026"),
+        ("kvkk", t("KVKK Aydınlatma Metni", "KVKK Notice (Turkey)"), 1, "16 Ekim 2026", "16 October 2026"),
+    ],
+}
+
+
+def legal_page(g, slug, title, version, date_tr, date_en):
+    gid = g["id"]
+    src = os.path.join(ROOT, "tools", "legal", gid, slug)
+    body_tr = open(src + ".tr.html", encoding="utf-8").read()
+    body_en = open(src + ".en.html", encoding="utf-8").read()
+    others = "".join(f'<li><a href="{s}.html"{" aria-current=\"page\"" if s == slug else ""}>{tl}</a></li>'
+                     for s, tl, _, _, _ in LEGAL[gid])
+    body = f'''<main style="--g-band: {g["band"]}; --g-accent: {g["accent"]}; --g-accent-ink: {g["accent_ink"]}">
+  <div class="hero legal-hero"><div class="wrap">
+    <a class="back" href="/games/{gid}/">← {g["name"]}</a>
+    <h1>{title}</h1>
+    <p class="doc-meta">{t("Son güncelleme: " + date_tr + " · Sürüm " + str(version), "Last updated: " + date_en + " · Version " + str(version))}</p>
+  </div></div>
+  <div class="wrap layout">
+    <article class="legal"><div data-l="tr">{body_tr}</div><div data-l="en">{body_en}</div></article>
+    <aside class="side">
+      <div class="panel"><h2>{t("Belgeler", "Documents")}</h2><ul class="doc-nav">{others}</ul></div>
+      <div class="panel"><h2>{t("İletişim", "Contact")}</h2>{mail("copy-" + gid + "-" + slug)}</div>
+    </aside>
+  </div>
+</main>'''
+    return shell(plain(title) + " · " + plain(g["name"]), plain(title) + " — " + plain(g["name"]), body, g["icon"])
+
+
 def write(path, text):
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -295,6 +330,8 @@ def main():
     write("index.html", home())
     for g in GAMES:
         write(os.path.join("games", g["id"], "index.html"), page(g))
+        for slug, title, version, date_tr, date_en in LEGAL.get(g["id"], []):
+            write(os.path.join("games", g["id"], slug + ".html"), legal_page(g, slug, title, version, date_tr, date_en))
 
 
 if __name__ == "__main__":
