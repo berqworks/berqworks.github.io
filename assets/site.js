@@ -4,6 +4,8 @@
   function setLang(lang) {
     root.setAttribute("data-lang", lang);
     root.lang = lang;
+    var title = document.querySelector('meta[name="bw-title-' + lang + '"]');
+    if (title) document.title = title.getAttribute("content");
     document.querySelectorAll("[data-set-lang]").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
     });

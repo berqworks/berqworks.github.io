@@ -158,13 +158,15 @@ def mail(id_):
             % (id_, t("Kopyala", "Copy")))
 
 
-def shell(title, description, body, image="/assets/games/water-sort/icon.svg"):
+def shell(title, description, body, image="/assets/games/water-sort/icon.svg", title_tr=None):
     return f'''<!doctype html>
 <html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{html.escape(title)}</title>
+<meta name="bw-title-en" content="{html.escape(title)}">
+<meta name="bw-title-tr" content="{html.escape(title_tr or title)}">
 <meta name="description" content="{html.escape(description)}">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(description)}">
@@ -280,7 +282,7 @@ def page(g):
     </aside>
   </div>
 </main>'''
-    return shell(plain(g["name"]) + " · BerqWorks", plain(g["card"]), body, g["icon"])
+    return shell(plain(g["name"]) + " · BerqWorks", plain(g["card"]), body, g["icon"], plain(g["name"], "tr") + " · BerqWorks")
 
 
 # Bu sitede barındırılan yasal metinler: oyun → (dosya adı, başlık, sürüm, tarih TR, tarih EN).
@@ -315,7 +317,8 @@ def legal_page(g, slug, title, version, date_tr, date_en):
     </aside>
   </div>
 </main>'''
-    return shell(plain(title) + " · " + plain(g["name"]), plain(title) + " — " + plain(g["name"]), body, g["icon"])
+    return shell(plain(title) + " · " + plain(g["name"]), plain(title) + " — " + plain(g["name"]), body, g["icon"],
+                 plain(title, "tr") + " · " + plain(g["name"], "tr"))
 
 
 def write(path, text):
