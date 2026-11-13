@@ -153,6 +153,10 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
+      "hero_size": [
+        960,
+        432
+      ],
       "screens": {
         "en": [
           {
@@ -410,6 +414,10 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
+      "hero_size": [
+        960,
+        576
+      ],
       "screens": {
         "en": [
           {
@@ -658,6 +666,10 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
+      "hero_size": [
+        540,
+        900
+      ],
       "screens": {
         "en": [
           {

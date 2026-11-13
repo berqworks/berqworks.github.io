@@ -139,3 +139,82 @@ body[data-game] { --rule: color-mix(in srgb, var(--fg) 22%, transparent); }
   .game-row--right .game-text, .game-row--right .game-card { text-align: left; margin-left: 0; }
   .game-icon { width: 120px; }
 }
+
+/* ---------- Game page ---------- */
+body.game { background: var(--bg); color: var(--fg); }
+body.game .top, body.game .foot { border-color: var(--rule); }
+body.game .foot-note { color: inherit; opacity: .7; }
+body.game h1, body.game h2, body.game h3 { font-family: var(--heading-font, var(--serif)); }
+
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(32px, 6vw, 80px); align-items: center;
+  padding: clamp(40px, 7vw, 96px) var(--gutter);
+  background: linear-gradient(170deg, var(--bg), var(--bg2));
+}
+.hero--portrait { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.hero-icon {
+  width: clamp(84px, 9vw, 116px); border-radius: 22.5%; margin-bottom: 28px;
+  box-shadow: 0 18px 32px -14px rgba(0,0,0,.6);
+}
+.hero h1 { font-size: clamp(44px, 7vw, 92px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 18px; }
+.hero-card { font-size: clamp(19px, 1.9vw, 23px); line-height: 1.5; max-width: 32ch; margin-bottom: 30px; }
+.soon {
+  display: inline-block; padding: 11px 18px; border-radius: 999px;
+  border: 1.5px dashed color-mix(in srgb, var(--fg) 55%, transparent);
+  font-weight: 600; font-size: 16px;
+}
+.play {
+  display: inline-block; padding: 12px 22px; border-radius: 999px;
+  background: var(--accent); color: var(--bg); font-weight: 700; text-decoration: none;
+}
+.hero-media { margin: 0; }
+.hero-media video {
+  width: 100%; border-radius: 14px; background: rgba(0,0,0,.25);
+  box-shadow: 0 30px 60px -24px rgba(0,0,0,.7), 0 0 0 1px color-mix(in srgb, var(--fg) 12%, transparent);
+}
+.hero--portrait .hero-media video { max-width: 380px; margin-inline: auto; border-radius: 22px; }
+
+.block {
+  display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 3.2fr); gap: 20px clamp(24px, 5vw, 64px);
+  padding: clamp(40px, 6vw, 80px) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+.block > h2 {
+  font-size: 15px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  opacity: .72; padding-top: 6px;
+}
+.how-text { font-size: clamp(20px, 2vw, 25px); line-height: 1.55; max-width: 44ch; margin: 0; }
+
+.highlights-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.motion { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: color-mix(in srgb, var(--fg) 6%, transparent); }
+[data-game="water-sort"] .motion { aspect-ratio: 9 / 16; max-height: 560px; }
+.features { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 36px; }
+.features h3 { font-size: 21px; font-weight: 800; color: var(--accent); margin-bottom: 8px; line-height: 1.2; }
+.features p { margin: 0; font-size: 17px; line-height: 1.55; opacity: .92; }
+
+.shots {
+  list-style: none; margin: 0; padding: 0 0 14px; display: flex; gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin;
+}
+.shots li { flex: none; scroll-snap-align: start; }
+.shots img { height: clamp(200px, 26vw, 330px); width: auto; border-radius: 10px; box-shadow: 0 14px 28px -16px rgba(0,0,0,.7); }
+.screens--portrait .shots img { height: clamp(320px, 40vw, 520px); }
+
+.info { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 36px; margin: 0; }
+.info dt { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .65; margin-bottom: 4px; }
+.info dd { margin: 0; font-size: 17px; line-height: 1.5; }
+
+.legal-links ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 32px; }
+.legal-links a { font-weight: 600; text-underline-offset: 4px; }
+
+@media (max-width: 880px) {
+  .hero, .hero--portrait { grid-template-columns: 1fr; }
+  .block { grid-template-columns: 1fr; }
+  .highlights-grid { grid-template-columns: 1fr; }
+  .motion { max-width: 420px; }
+  .info { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .features, .info { grid-template-columns: 1fr; }
+}
