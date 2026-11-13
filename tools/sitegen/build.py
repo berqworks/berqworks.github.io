@@ -71,8 +71,13 @@ def build(root: Path, out: Path) -> None:
 
 
 def _render_pages(root: Path, out: Path) -> None:
-    # Temporary until the page renderers exist (Tasks 5-7).
-    write(out, "index.html", "<!doctype html><title>BerqWorks</title>")
+    from .data import load_site
+    from .home import render_home
+
+    site = load_site(root)
+    write(out, "index.html", render_home(site, "en"))
+    write(out, "tr/index.html", render_home(site, "tr"))
+    # Placeholders until the legal renderer exists (Task 7).
     for rel in REQUIRED_PATHS:
         if rel.endswith(".html") and not (out / rel).exists():
             write(out, rel, "<!doctype html><title>BerqWorks</title>")
