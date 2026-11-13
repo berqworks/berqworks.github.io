@@ -112,7 +112,7 @@ async function waterSort(box) {
   const canvas = document.createElement("canvas");
   canvas.width = w; canvas.height = h;
   box.append(canvas);
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
   ctx.drawImage(mask, 0, 0, w, h);
   const regions = ctx.getImageData(0, 0, w, h).data;

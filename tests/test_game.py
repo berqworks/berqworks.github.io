@@ -54,6 +54,8 @@ class GameTest(unittest.TestCase):
 
     def test_hero_video_has_size(self):
         self.assertRegex(self.render("water-sort", "en"), r'<video[^>]* width="540" height="900"')
+        for game in self.site["games"]:
+            self.assertEqual(set(game["media"]["hero_size"]), {"en", "tr"}, game["id"])
         self.assertRegex(self.render("mahjong-caravan", "en"), r'<video[^>]* width="960" height="432"')
 
     def test_theme_applied(self):

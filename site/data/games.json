@@ -153,10 +153,16 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
-      "hero_size": [
-        960,
-        432
-      ],
+      "hero_size": {
+        "en": [
+          960,
+          432
+        ],
+        "tr": [
+          960,
+          432
+        ]
+      },
       "screens": {
         "en": [
           {
@@ -414,10 +420,16 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
-      "hero_size": [
-        960,
-        576
-      ],
+      "hero_size": {
+        "en": [
+          960,
+          576
+        ],
+        "tr": [
+          960,
+          576
+        ]
+      },
       "screens": {
         "en": [
           {
@@ -666,10 +678,16 @@
         "en": "poster-en.webp",
         "tr": "poster-tr.webp"
       },
-      "hero_size": [
-        540,
-        900
-      ],
+      "hero_size": {
+        "en": [
+          540,
+          900
+        ],
+        "tr": [
+          540,
+          900
+        ]
+      },
       "screens": {
         "en": [
           {

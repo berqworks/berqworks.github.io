@@ -41,7 +41,7 @@ def render_game(site: dict, game: dict, lang: str) -> str:
 <div class="play-slot">{play}</div>
 </div>
 <figure class="hero-media">
-<video width="{media['hero_size'][0]}" height="{media['hero_size'][1]}" muted loop playsinline preload="none" data-autoplay poster="{_media(game, media['hero_poster'][lang])}" aria-label="{escape(name)}">
+<video width="{media['hero_size'][lang][0]}" height="{media['hero_size'][lang][1]}" muted loop playsinline preload="none" data-autoplay poster="{_media(game, media['hero_poster'][lang])}" aria-label="{escape(name)}">
 <source src="{_media(game, media['hero_video'][lang])}" type="video/mp4">
 </video>
 </figure>

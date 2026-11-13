@@ -3,6 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){function pickLang(hash, stored, navLang, targetLang = null) {
+  if (targetLang === "tr" || targetLang === "en") return targetLang;
+  const h = (hash || "").replace(/^#/, "");
+  if (h === "tr" || h.startsWith("tr-")) return "tr";
+  if (h === "en" || h.startsWith("en-")) return "en";
+  if (stored === "tr" || stored === "en") return stored;
+  return (navLang || "").toLowerCase().startsWith("tr") ? "tr" : "en";
+}
+function shouldRedirect(pathname, stored, navLang, referrer = "", origin = "") {
+  if (stored !== null) return null;
+  if (origin && referrer && referrer.startsWith(origin + "/")) return null;
+  if (!(navLang || "").toLowerCase().startsWith("tr")) return null;
+  if (pathname.startsWith("/tr/") || pathname.endsWith(".html")) return null;
+  return "/tr" + pathname;
+}
+function decide(env) {
+  if (env.legal) return { lang: pickLang(env.hash, env.stored, env.navLang), redirect: null };
+  return { lang: null, redirect: shouldRedirect(env.pathname, env.stored, env.navLang, env.referrer, env.origin) };
+}
+var s=null;try{s=localStorage.getItem("bw-lang")}catch(e){}var d=document.documentElement;var r=decide({pathname:location.pathname,hash:location.hash,referrer:document.referrer,origin:location.origin,stored:s,navLang:navigator.language||"",legal:d.hasAttribute("data-legal")});if(r.redirect){location.replace(r.redirect+location.hash)}else if(r.lang){d.dataset.lang=r.lang;d.lang=r.lang}})();</script>
 <title>Mahjong Caravan · BerqWorks</title>
 <meta name="description" content="A calm mahjong solitaire with no time limit and no penalties, where every board you&#x27;re dealt can be solved.">
 <link rel="canonical" href="https://berqworks.com/games/mahjong-caravan/">

@@ -43,3 +43,23 @@ test("navigation inside the site never redirects (storage may be blocked)", () =
   assert.equal(shouldRedirect("/", null, "tr-TR", "https://www.google.com/", origin), "/tr/");
   assert.equal(shouldRedirect("/", null, "tr-TR", "", origin), "/tr/");
 });
+
+import { decide } from "../../site/js/lang.js";
+
+test("decide: legal pages get a language, never a redirect", () => {
+  const env = { pathname: "/games/water-sort/kvkk.html", hash: "#en-3", referrer: "", origin: "https://berqworks.com",
+                stored: "tr", navLang: "tr-TR", legal: true };
+  assert.deepEqual(decide(env), { lang: "en", redirect: null });
+});
+
+test("decide: first Turkish visit from outside redirects, keeping nothing else", () => {
+  const env = { pathname: "/games/water-sort/", hash: "", referrer: "https://www.google.com/",
+                origin: "https://berqworks.com", stored: null, navLang: "tr-TR", legal: false };
+  assert.deepEqual(decide(env), { lang: null, redirect: "/tr/games/water-sort/" });
+});
+
+test("decide: inside-site move with blocked storage stays put", () => {
+  const env = { pathname: "/", hash: "", referrer: "https://berqworks.com/tr/", origin: "https://berqworks.com",
+                stored: null, navLang: "tr", legal: false };
+  assert.deepEqual(decide(env), { lang: null, redirect: null });
+});

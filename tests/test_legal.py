@@ -41,9 +41,12 @@ class LegalTest(unittest.TestCase):
 
     def test_nav_follows_page_language(self):
         html = render_legal(self.site, self.games["water-sort"], "privacy-policy")
-        self.assertIn('<a class="legal-tr" href="/tr/#games">Oyunlar</a>', html)
-        self.assertIn('<a class="legal-en" href="/#games">Games</a>', html)
-        self.assertIn('<span class="legal-tr">İletişim</span>', html)
+        self.assertIn('<a class="legal-tr" lang="tr" href="/tr/#games">Oyunlar</a>', html)
+        self.assertIn('<a class="legal-en" lang="en" href="/#games">Games</a>', html)
+        # Without JS both labels show, so they need a visible separator.
+        self.assertIn('<span class="legal-tr" lang="tr">İletişim</span><span class="legal-sep" aria-hidden="true"> / </span>'
+                      '<span class="legal-en" lang="en">Contact</span>', html)
+        self.assertRegex(re.sub(r"\s+", " ", CSS), r'html\[data-lang\] \.legal-sep')
 
     def test_titles_and_theme(self):
         html = render_legal(self.site, self.games["tile-swap-puzzle"], "terms-of-use")

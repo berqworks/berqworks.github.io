@@ -1,9 +1,28 @@
 """Shared page shell: head, top bar, footer."""
 
+import re
 from html import escape
 
 from . import urls
 from .data import t
+
+HEAD_RUNNER = (
+    'var s=null;try{s=localStorage.getItem("bw-lang")}catch(e){}'
+    'var d=document.documentElement;'
+    'var r=decide({pathname:location.pathname,hash:location.hash,referrer:document.referrer,'
+    'origin:location.origin,stored:s,navLang:navigator.language||"",legal:d.hasAttribute("data-legal")});'
+    'if(r.redirect){location.replace(r.redirect+location.hash)}else if(r.lang){d.dataset.lang=r.lang;d.lang=r.lang}'
+)
+
+
+def head_script(root) -> str:
+    """lang.js core (pickLang, shouldRedirect, decide) as a classic inline script."""
+    src = (root / "site" / "js" / "lang.js").read_text(encoding="utf-8")
+    core = src.split("// core:start", 1)[1].split("// core:end", 1)[0]
+    core = re.sub(r"^export ", "", core, flags=re.M)
+    core = "\n".join(line for line in core.splitlines() if line.strip() and not line.strip().startswith("//"))
+    return "<script>(function(){" + core + "\n" + HEAD_RUNNER + "})();</script>"
+
 
 HEADING_FONTS = {"nunito": "'Nunito'", "baloo": "'Baloo 2'", "aileron": "'Aileron'"}
 
@@ -51,10 +70,10 @@ def page(*, site: dict, lang: str, title: str, description: str, path: str, alt_
     if legal:
         # Bilingual page: both label sets, CSS shows the one matching html[data-lang].
         nav_html = "".join(
-            f'<a class="legal-{code}" href="{urls.home_path(code)}#games">{escape(t(studio["nav"]["games"], code))}</a>'
-            for code in ("tr", "en"))
-        nav_html += '<a href="#contact">' + "".join(
-            f'<span class="legal-{code}">{escape(t(studio["nav"]["contact"], code))}</span>'
+            f'<a class="legal-{code}" lang="{code}" href="{urls.home_path(code)}#games">'
+            f'{escape(t(studio["nav"]["games"], code))}</a>' for code in ("tr", "en"))
+        nav_html += '<a href="#contact">' + '<span class="legal-sep" aria-hidden="true"> / </span>'.join(
+            f'<span class="legal-{code}" lang="{code}">{escape(t(studio["nav"]["contact"], code))}</span>'
             for code in ("tr", "en")) + "</a>"
     html_attrs = f'lang="{lang}"' + (" data-legal" if legal else "")
 
@@ -63,6 +82,7 @@ def page(*, site: dict, lang: str, title: str, description: str, path: str, alt_
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{head_script(site["root"])}
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(description)}">
 <link rel="canonical" href="{canon}">

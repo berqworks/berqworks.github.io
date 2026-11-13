@@ -184,7 +184,7 @@ def main() -> None:
         media["icon"] = note("icon-256.webp", icon_src)
         media["icon_large"] = note("icon-512.webp", icon_src)
 
-        media["hero_video"], media["hero_poster"] = {}, {}
+        media["hero_video"], media["hero_poster"], media["hero_size"] = {}, {}, {}
         for lang, rel in cfg["video"].items():
             src = base / rel
             name = f"hero-{lang}.mp4"
@@ -201,7 +201,7 @@ def main() -> None:
             else:
                 webp(base / poster, out / pname, None if portrait else 960, 900 if portrait else None)
                 media["hero_poster"][lang] = note(pname, base / poster)
-            media["hero_size"] = list(size_of_webp(out / name))  # ffprobe reads mp4 too
+            media["hero_size"][lang] = list(size_of_webp(out / name))  # ffprobe reads mp4 too
 
         media["screens"] = {}
         for lang, shots in cfg["screens"].items():

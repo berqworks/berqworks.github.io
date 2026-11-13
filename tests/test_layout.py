@@ -52,3 +52,19 @@ class LayoutTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class HeadScriptTest(unittest.TestCase):
+    def test_language_decided_before_first_paint(self):
+        site = load_site(ROOT)
+        html = page(site=site, lang="en", title="t", description="d", path="/", alt_path="/tr/", body="")
+        head = html.split("</head>")[0]
+        inline = re.search(r"<script>(.*?)</script>", head, re.S)
+        self.assertIsNotNone(inline, "no inline head script")
+        self.assertIn("function decide", inline.group(1))
+        self.assertNotIn("export ", inline.group(1))
+        self.assertLess(head.index("<script>"), head.index('rel="stylesheet"'))
+
+    def test_body_does_not_hide_overflow(self):
+        compact = re.sub(r"\s+", "", CSS)
+        self.assertNotIn("overflow-x:hidden", compact)
