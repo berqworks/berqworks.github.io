@@ -1,0 +1,141 @@
+[
+  {
+    "id": "mahjong-caravan",
+    "name": {"en": "Mahjong Caravan", "tr": "Mahjong Caravan"},
+    "card": {
+      "en": "A calm mahjong solitaire with no time limit and no penalties, where every board you're dealt can be solved.",
+      "tr": "Süre baskısı ve cezası olmayan, her tahtası çözülebilir kurulan sakin bir mahjong solitaire."
+    },
+    "short": {
+      "en": "Match pairs of free tiles until the board is empty. Undo as often as you like, and if you get stuck, shuffle what's left; the board is rebuilt so it can still be solved. Play a 400-level journey or pick any of 46 layouts.",
+      "tr": "Açıktaki eş taşları eşleştir, tahtayı boşalt. İstediğin kadar geri al; takılırsan kalan taşları karıştır, tahta yine çözülebilir şekilde dizilir. 400 seviyelik maceraya devam et ya da 46 yerleşimden birini seç."
+    },
+    "age_row": null,
+    "orientation": "landscape",
+    "theme": {"bg": "#1f5a3e", "bg2": null, "fg": "#f5efe0", "accent": "#e0a63a"},
+    "heading_font": "nunito",
+    "play_url": null,
+    "features": [
+      {"title": {"en": "Every board can be solved", "tr": "Her tahta çözülebilir"},
+       "text": {"en": "Boards are built by playing a solution in reverse, so there is always a way through. A shuffle uses the same method on the tiles that are left.",
+                "tr": "Tahtalar bir çözüm tersten oynanarak kurulur, yani her zaman bir çıkış yolu vardır. Karıştırma da kalan taşlara aynı yöntemi uygular."}},
+      {"title": {"en": "No time pressure, no penalties", "tr": "Süre baskısı yok, ceza yok"},
+       "text": {"en": "The clock only decides how many stars you get. No board ends because time ran out, and a wrong pair costs nothing.",
+                "tr": "Saat yalnızca kaç yıldız alacağını belirler. Hiçbir tahta süre dolduğu için bitmez, yanlış çiftin bir bedeli yoktur."}},
+      {"title": {"en": "Unlimited undo", "tr": "Sınırsız geri al"},
+       "text": {"en": "Take back as many moves as you want, shuffles included.",
+                "tr": "Karıştırma dahil, istediğin kadar hamleyi geri al."}},
+      {"title": {"en": "400 levels, 46 layouts", "tr": "400 seviye, 46 yerleşim"},
+       "text": {"en": "A journey that grows from 30-tile shapes to full 144-tile boards, split into eight chapters of 50 levels. In free play, pick any of the 46 layouts.",
+                "tr": "30 taşlık şekillerden 144 taşlık tam tahtalara doğru büyüyen, 50'şer seviyelik sekiz bölüme ayrılmış bir macera. Serbest oyunda 46 yerleşimden istediğini seç."}},
+      {"title": {"en": "Easy on the eyes", "tr": "Gözü yormayan tasarım"},
+       "text": {"en": "Large tiles and text, a high-contrast theme, corner labels on tiles, free-tile highlighting, left-handed mode and reduced motion.",
+                "tr": "Büyük taşlar ve yazılar, yüksek kontrast teması, taş köşesinde etiket, serbest taş vurgusu, solak modu ve animasyonları azaltma."}}
+    ],
+    "info": [
+      [{"en": "Platform", "tr": "Platform"}, {"en": "Android · phone and tablet · landscape", "tr": "Android · telefon ve tablet · yatay"}],
+      [{"en": "Age", "tr": "Yaş"}, {"en": "Adults · rated PEGI 3", "tr": "Yetişkinler · içerik derecesi PEGI 3"}],
+      [{"en": "Languages", "tr": "Diller"}, {"en": "English, Turkish", "tr": "Türkçe, İngilizce"}],
+      [{"en": "Price", "tr": "Fiyat"}, {"en": "Free; contains ads. One-time purchase: Remove ads", "tr": "Ücretsiz; reklam içerir. Tek seferlik satın alma: Reklamları kaldır"}],
+      [{"en": "Ads", "tr": "Reklam"}, {"en": "Never during play; only after a won board", "tr": "Oynarken asla; yalnızca kazanılan tahtadan sonra"}],
+      [{"en": "Internet", "tr": "İnternet"}, {"en": "Not needed to play", "tr": "Oynamak için gerekmez"}]
+    ],
+    "legal_docs": ["privacy-policy", "terms-of-use", "kvkk"],
+    "media": {}
+  },
+  {
+    "id": "tile-swap-puzzle",
+    "name": {"en": "Tile Swap", "tr": "Tile Swap"},
+    "card": {
+      "en": "A picture puzzle for young children with no timer: swap the tiles until the picture is whole again.",
+      "tr": "Küçük çocuklar için süresiz resim yapbozu: parçaların yerini değiştir, resmi tamamla."
+    },
+    "short": {
+      "en": "Tile Swap is a picture puzzle for young children. A picture is cut into squares and shuffled. Your child taps or drags two pieces to swap them, and each piece clicks into place when it lands where it belongs. There are 180 pictures in 18 categories, with no timer and no ads.",
+      "tr": "Tile Swap, küçük çocuklar için bir resim yapbozu. Resim karelere bölünüp karıştırılır. Çocuk iki parçaya dokunarak ya da birini sürükleyerek yerlerini değiştirir; doğru yere gelen parça yerine oturur. 18 kategoride 180 resim var, süre de reklam da yok."
+    },
+    "age_row": {"en": "Ages 3–8", "tr": "3–8 yaş"},
+    "orientation": "landscape",
+    "theme": {"bg": "#1B1740", "bg2": "#332B70", "fg": "#FAEEDA", "accent": "#FFA94D"},
+    "heading_font": "baloo",
+    "play_url": null,
+    "features": [
+      {"title": {"en": "Swap, drag, done", "tr": "Dokun, sürükle, tamamla"},
+       "text": {"en": "Tap two pieces or drag one onto another. Pieces that land in the right spot lock in with a tick.",
+                "tr": "İki parçaya dokun ya da birini diğerinin üstüne sürükle. Doğru yere gelen parça ✓ ile yerine oturur."}},
+      {"title": {"en": "No timer, no ads", "tr": "Süre yok, reklam yok"},
+       "text": {"en": "There is no clock on any board, and the game shows no ads at all.",
+                "tr": "Hiçbir tahtada sayaç yok, oyunda hiç reklam yok."}},
+      {"title": {"en": "18 categories, 180 pictures", "tr": "18 kategori, 180 resim"},
+       "text": {"en": "10 pictures in each category. Animals, Sea Life, Vehicles and Toys are free.",
+                "tr": "Her kategoride 10 resim. Hayvanlar, Deniz Canlıları, Taşıtlar ve Oyuncaklar ücretsiz."}},
+      {"title": {"en": "A guiding hand", "tr": "Yol gösteren el"},
+       "text": {"en": "Until the first puzzle is solved, a hand shows each next move. No reading needed.",
+                "tr": "İlk yapboz bitene kadar bir el her hamleyi gösterir. Okuma bilmek gerekmez."}},
+      {"title": {"en": "Hear the picture's name", "tr": "Resmin adını duy"},
+       "text": {"en": "The finished picture's name (lion, rocket…) is shown and read aloud in the game's language.",
+                "tr": "Biten resmin adı (aslan, roket…) yazılır ve oyunun dilinde sesli okunur."}},
+      {"title": {"en": "Parental gate", "tr": "Ebeveyn kapısı"},
+       "text": {"en": "Purchases, the Parents area and outside links open only after an adult taps a spelled-out number sequence. Kids see \"Ask a grown-up\", never a price.",
+                "tr": "Satın almalar, Ebeveynler bölümü ve dış bağlantılar ancak bir yetişkin yazıyla verilen sayıları sırayla girince açılır. Çocuk fiyat değil \"Büyüğüne sor\" görür."}}
+    ],
+    "info": [
+      [{"en": "Platform", "tr": "Platform"}, {"en": "Android · phone and tablet · landscape", "tr": "Android · telefon ve tablet · yatay"}],
+      [{"en": "Age", "tr": "Yaş"}, {"en": "Ages 3–8", "tr": "3–8 yaş"}],
+      [{"en": "Languages", "tr": "Diller"}, {"en": "English, Turkish, Chinese, Japanese, German, French, Spanish, Portuguese, Russian, Italian", "tr": "Türkçe, İngilizce, Çince, Japonca, Almanca, Fransızca, İspanyolca, Portekizce, Rusça, İtalyanca"}],
+      [{"en": "Price", "tr": "Fiyat"}, {"en": "Free to download; no ads; in-app purchases", "tr": "İndirmesi ücretsiz; reklam yok, uygulama içi satın alma"}],
+      [{"en": "Ads", "tr": "Reklam"}, {"en": "None", "tr": "Yok"}],
+      [{"en": "For parents", "tr": "Ebeveynler için"}, {"en": "Purchases and outside links open only after a parent check", "tr": "Satın almalar ve dış bağlantılar ancak ebeveyn doğrulamasından sonra açılır"}]
+    ],
+    "legal_docs": ["privacy-policy", "terms-of-use"],
+    "media": {}
+  },
+  {
+    "id": "water-sort",
+    "name": {"en": "Water Sort: Color Atlas", "tr": "Water Sort: Renk Atlası"},
+    "card": {
+      "en": "Pour each color into its own vessel and bring faded scenes back to color.",
+      "tr": "Renkleri kendi kaplarına dök, solmuş sahnelerin yeniden renklendiğini izle."
+    },
+    "short": {
+      "en": "Water Sort: Color Atlas is a calm sorting puzzle. Pour colored liquids between tubes until every color is in a vessel of its own. Each level you finish brings color back to one part of a scene in the Atlas, and every 20 levels a whole scene is complete.",
+      "tr": "Water Sort: Renk Atlası sakin bir sıralama bulmacası. Renkli sıvıları tüpler arasında dökerek her rengi kendi kabında topluyorsun. Bitirdiğin her seviye Atlas'taki bir sahnenin bir parçasını yeniden renklendiriyor; her 20 seviyede bir sahne tamamlanıyor."
+    },
+    "age_row": null,
+    "orientation": "portrait",
+    "theme": {"bg": "#0F1424", "bg2": null, "fg": "#F4F6FB", "accent": "#FFC857"},
+    "heading_font": "aileron",
+    "play_url": null,
+    "features": [
+      {"title": {"en": "The Color Atlas", "tr": "Renk Atlası"},
+       "text": {"en": "50 scenes, 1,000 levels. Each level colors one of a scene's 20 areas; every 20 levels a scene is complete.",
+                "tr": "50 sahne, 1.000 seviye. Her seviye sahnenin 20 bölgesinden birini renklendirir; her 20 seviyede bir sahne tamamlanır."}},
+      {"title": {"en": "A new center vessel every level", "tr": "Her seviyede yeni bir merkez kap"},
+       "text": {"en": "The large vessel in the middle holds 8 units and takes one of 30 shapes that hint at what you are coloring: lighthouse, whale, bell, owl…",
+                "tr": "Ortadaki büyük kap 8 birim alır ve renklendirdiğin şeyi andıran 30 biçimden birine girer: deniz feneri, balina, çan, baykuş…"}},
+      {"title": {"en": "Every level can be solved", "tr": "Her seviye çözülebilir"},
+       "text": {"en": "Levels are checked by a solver before release. Hints follow a real solution, and the game tells you plainly when there is no way out from where you are.",
+                "tr": "Seviyeler yayından önce çözücüyle doğrulanır. İpucu gerçek bir çözümü izler; bulunduğun yerden çıkış yoksa oyun bunu açıkça söyler."}},
+      {"title": {"en": "Color aid", "tr": "Renk yardımı"},
+       "text": {"en": "Each of the 12 colors has its own symbol, with an optional pattern. Offered from level 6, and always in Settings.",
+                "tr": "12 rengin her birinin kendi sembolü, istersen deseni de var. 6. seviyede önerilir, Ayarlar'da her zaman açılabilir."}},
+      {"title": {"en": "Daily puzzle", "tr": "Günlük bulmaca"},
+       "text": {"en": "A new puzzle every day, the same for everyone. Keep a streak for extra Pigment on days 3 and 7.",
+                "tr": "Her gün herkese aynı yeni bulmaca. Seriyi sürdürünce 3. günde +50, 7. günde +150 Pigment."}},
+      {"title": {"en": "No timer, no lives", "tr": "Süre ve can yok"},
+       "text": {"en": "Play at your own pace. There is no countdown and no energy system.",
+                "tr": "Kendi hızında oyna. Geri sayım da enerji sistemi de yok."}}
+    ],
+    "info": [
+      [{"en": "Platform", "tr": "Platform"}, {"en": "Android · phone and tablet · portrait", "tr": "Android · telefon ve tablet · dikey"}],
+      [{"en": "Age", "tr": "Yaş"}, {"en": "13+", "tr": "13+"}],
+      [{"en": "Languages", "tr": "Diller"}, {"en": "English, Turkish", "tr": "Türkçe, İngilizce"}],
+      [{"en": "Price", "tr": "Fiyat"}, {"en": "Free; contains ads and in-app purchases (No Ads Pack available)", "tr": "Ücretsiz; reklam ve uygulama içi satın alma içerir (Reklamsız Paket var)"}],
+      [{"en": "Ads", "tr": "Reklam"}, {"en": "Never during a level; banner only on the Atlas screen", "tr": "Seviye oynarken asla; banner yalnızca Atlas ekranında"}],
+      [{"en": "Internet", "tr": "İnternet"}, {"en": "Required; No Ads Pack owners can play offline", "tr": "Gerekir; Reklamsız Paket sahipleri çevrimdışı da oynar"}]
+    ],
+    "legal_docs": ["privacy-policy", "terms-of-use", "kvkk"],
+    "legal_version": 1,
+    "media": {}
+  }
+]

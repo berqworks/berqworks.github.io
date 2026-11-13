@@ -1,0 +1,38 @@
+{
+  "name": "BerqWorks",
+  "email": "berqworks@gmail.com",
+  "intro": {
+    "en": [
+      "BerqWorks is an independent studio that makes games and apps. Every step, from the first sketch to the store listing, happens at the same desk. Three Android games are on the way: a calm mahjong solitaire for grown-ups, a picture puzzle for children aged 3 to 8, and a sorting puzzle that brings faded scenes back to color.",
+      "None of them has a clock you can lose to. Every puzzle has a solution, and when you're stuck, the game tells you so."
+    ],
+    "tr": [
+      "BerqWorks oyun ve uygulama yapan bağımsız bir stüdyo. Fikirden tasarıma, koddan mağazaya kadar her adım aynı masada atılıyor. Şu an üç Android oyunu yayına hazırlanıyor: yetişkinler için sakin bir mahjong, 3–8 yaş arası çocuklar için bir resim yapbozu ve solmuş sahneleri yeniden renklendiren bir sıralama bulmacası.",
+      "Bu oyunların hiçbirinde süreye karşı yarışıp kaybetmezsin. Her bulmacanın bir çözümü var. Takıldığında oyun bunu açıkça söylüyor."
+    ]
+  },
+  "nav": {
+    "games": {"en": "Games", "tr": "Oyunlar"},
+    "contact": {"en": "Contact", "tr": "İletişim"}
+  },
+  "labels": {
+    "coming_soon_row": {"en": "Coming soon · Android", "tr": "Yakında · Android"},
+    "meet": {"en": "Meet the game →", "tr": "Oyunu tanı →"},
+    "coming_soon_play": {"en": "Coming soon to Google Play", "tr": "Yakında Google Play'de"},
+    "get_on_play": {"en": "Get it on Google Play", "tr": "Google Play'den indir"},
+    "how": {"en": "How to play", "tr": "Nasıl oynanır"},
+    "highlights": {"en": "Highlights", "tr": "Öne çıkanlar"},
+    "screens": {"en": "Screens", "tr": "Ekranlar"},
+    "details": {"en": "Details", "tr": "Bilgiler"},
+    "legal": {"en": "Legal", "tr": "Yasal"},
+    "last_updated": {"en": "Last updated", "tr": "Son güncelleme"},
+    "version": {"en": "Version", "tr": "Sürüm"},
+    "back": {"en": "BerqWorks", "tr": "BerqWorks"}
+  },
+  "legal_date": {"en": "13 November 2026", "tr": "13 Kasım 2026"},
+  "legal_titles": {
+    "privacy-policy": {"en": "Privacy Policy", "tr": "Gizlilik Politikası"},
+    "terms-of-use": {"en": "Terms of Use", "tr": "Kullanım Koşulları"},
+    "kvkk": {"en": "KVKK Notice", "tr": "KVKK Aydınlatma Metni"}
+  }
+}

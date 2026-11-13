@@ -50,6 +50,12 @@ def total_size(out: Path) -> int:
 
 
 def build(root: Path, out: Path) -> None:
+    from .data import load_site, validate
+
+    errors = validate(load_site(root))
+    if errors:
+        print("\n".join(errors))
+        raise SystemExit(1)
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(root / "site" / "root", out)
