@@ -72,20 +72,27 @@ def build(root: Path, out: Path) -> None:
         raise SystemExit(1)
 
 
+LEGACY_DOCS = {
+    "mahjong-caravan": ("privacy-policy", "terms-of-use"),
+    "tile-swap-puzzle": ("privacy-policy", "terms-of-use"),
+}
+
+
 def _render_pages(root: Path, out: Path) -> None:
     from .data import load_site
+    from .game import render_game
     from .home import render_home
+    from .legal import render_legal
 
     site = load_site(root)
     write(out, "index.html", render_home(site, "en"))
     write(out, "tr/index.html", render_home(site, "tr"))
-    from .game import render_game
 
     for game in site["games"]:
         for lang in ("en", "tr"):
             rel = urls.game_path(lang, game["id"]).lstrip("/") + "index.html"
             write(out, rel, render_game(site, game, lang))
-    # Placeholders until the legal renderer exists (Task 7).
-    for rel in REQUIRED_PATHS:
-        if rel.endswith(".html") and not (out / rel).exists():
-            write(out, rel, "<!doctype html><title>BerqWorks</title>")
+        for doc in game["legal_docs"]:
+            write(out, urls.legal_path(game["id"], doc).lstrip("/"), render_legal(site, game, doc))
+        for doc in LEGACY_DOCS.get(game["id"], ()):
+            write(out, f"{game['id']}/{doc}.html", render_legal(site, game, doc, legacy=True))

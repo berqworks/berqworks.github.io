@@ -47,6 +47,15 @@ def page(*, site: dict, lang: str, title: str, description: str, path: str, alt_
                   f'data-lang-switch="{other}">{other.upper()}</a>')
 
     nav = t(studio["nav"]["games"], lang), t(studio["nav"]["contact"], lang)
+    nav_html = (f'<a href="{home}#games">{escape(nav[0])}</a><a href="#contact">{escape(nav[1])}</a>{switch}')
+    if legal:
+        # Bilingual page: both label sets, CSS shows the one matching html[data-lang].
+        nav_html = "".join(
+            f'<a class="legal-{code}" href="{urls.home_path(code)}#games">{escape(t(studio["nav"]["games"], code))}</a>'
+            for code in ("tr", "en"))
+        nav_html += '<a href="#contact">' + "".join(
+            f'<span class="legal-{code}">{escape(t(studio["nav"]["contact"], code))}</span>'
+            for code in ("tr", "en")) + "</a>"
     html_attrs = f'lang="{lang}"' + (" data-legal" if legal else "")
 
     return f"""<!doctype html>
@@ -74,7 +83,7 @@ def page(*, site: dict, lang: str, title: str, description: str, path: str, alt_
 <body{body_attrs}>
 <header class="top">
 <a class="wordmark" href="{home}">BerqWorks</a>
-<nav class="top-nav"><a href="{home}#games">{escape(nav[0])}</a><a href="#contact">{escape(nav[1])}</a>{switch}</nav>
+<nav class="top-nav">{nav_html}</nav>
 </header>
 <main>
 {body}
