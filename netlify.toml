@@ -1,0 +1,4 @@
+# public/ is built locally and committed; Netlify only publishes it.
+[build]
+  publish = "public"
+  command = ""
