@@ -12,8 +12,14 @@ def _media(game: dict, name: str) -> str:
 
 
 def motion_attrs(game: dict) -> str:
-    """data-* attributes the signature motion (motion.js) reads. Filled in by Task 8."""
-    return ""
+    """data-* attributes the signature motion (motion.js) reads."""
+    m = game["media"]["motion"]
+    if "tiles" in m:
+        tiles = " ".join(_media(game, f) for f in m["tiles"])
+        return f' data-src-body="{_media(game, m["body"])}" data-src-tiles="{tiles}"'
+    if "image" in m:
+        return f' data-src="{_media(game, m["image"])}"'
+    return f' data-src-color="{_media(game, m["color"])}" data-src-mask="{_media(game, m["mask"])}"'
 
 
 def render_game(site: dict, game: dict, lang: str) -> str:

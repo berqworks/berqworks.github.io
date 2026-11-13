@@ -71,6 +71,26 @@ class GameTest(unittest.TestCase):
         self.assertIn("Android · telefon ve tablet · dikey", html)
         self.assertIn("Reklamsız Paket", html)
 
+    def test_motion_attributes(self):
+        for gid in self.games:
+            self.assertIn(f'data-motion="{gid}"', self.render(gid, "en"))
+        ws = self.render("water-sort", "en")
+        color = re.search(r'data-src-color="([^"]+)"', ws).group(1)
+        mask = re.search(r'data-src-mask="([^"]+)"', ws).group(1)
+        for path in (color, mask):
+            self.assertTrue((ROOT / "site" / path.lstrip("/")).is_file(), path)
+        self.assertRegex(self.render("tile-swap-puzzle", "en"), r'data-src="[^"]*swap\.webp"')
+        mj = self.render("mahjong-caravan", "en")
+        self.assertIn('data-src-body="/assets/media/mahjong-caravan/tile-body.svg"', mj)
+        self.assertEqual(len(re.search(r'data-src-tiles="([^"]+)"', mj).group(1).split(" ")), 6)
+
+    def test_motion_script_and_no_autoplay(self):
+        for gid in self.games:
+            html = self.render(gid, "tr")
+            self.assertIn('<script type="module" src="/js/motion.js"></script>', html)
+            self.assertNotRegex(html, r"<video[^>]*\sautoplay[\s>]")
+            self.assertIn("data-autoplay", html)
+
     def test_title(self):
         self.assertIn("<title>Water Sort: Renk Atlası · BerqWorks</title>", self.render("water-sort", "tr"))
 
