@@ -83,8 +83,12 @@ def _render_pages(root: Path, out: Path) -> None:
     from .game import render_game
     from .home import render_home
     from .legal import render_legal
+    from .extras import render_404, robots, sitemap
 
     site = load_site(root)
+    write(out, "404.html", render_404(site))
+    write(out, "sitemap.xml", sitemap(site))
+    write(out, "robots.txt", robots())
     write(out, "index.html", render_home(site, "en"))
     write(out, "tr/index.html", render_home(site, "tr"))
 

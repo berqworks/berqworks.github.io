@@ -1,10 +1,11 @@
+import re
 import tempfile
 import unittest
 from pathlib import Path
 
 from _helpers import ROOT, SOURCE  # noqa: F401  (sets sys.path)
 from sitegen import urls
-from sitegen.build import REQUIRED_PATHS, build, forbidden_hits, missing_required
+from sitegen.build import REQUIRED_PATHS, build, forbidden_hits, missing_required, total_size
 
 EXPECTED = {
     "games/water-sort/privacy-policy.html", "games/water-sort/terms-of-use.html", "games/water-sort/kvkk.html",
@@ -43,6 +44,35 @@ class BuildTest(unittest.TestCase):
 
     def test_build_output_has_no_forbidden_name(self):
         self.assertEqual(forbidden_hits(self.out), [])
+
+    def test_sitemap(self):
+        xml = (self.out / "sitemap.xml").read_text(encoding="utf-8")
+        locs = re.findall(r"<loc>([^<]+)</loc>", xml)
+        self.assertEqual(len(locs), 8)
+        self.assertTrue(all(l.startswith("https://berqworks.com/") for l in locs))
+        self.assertFalse(any(l.endswith(".html") for l in locs))
+        self.assertIn('hreflang="tr"', xml)
+
+    def test_robots_and_404(self):
+        self.assertIn("Sitemap: https://berqworks.com/sitemap.xml",
+                      (self.out / "robots.txt").read_text(encoding="utf-8"))
+        page = (self.out / "404.html").read_text(encoding="utf-8")
+        self.assertIn('href="/"', page)
+        self.assertIn('href="/tr/"', page)
+
+    def test_brand_assets(self):
+        for rel in ("assets/brand/favicon.svg", "assets/brand/og.png", "assets/brand/og-mahjong-caravan.png",
+                    "assets/brand/og-tile-swap-puzzle.png", "assets/brand/og-water-sort.png"):
+            self.assertTrue((self.out / rel).is_file(), rel)
+
+    def test_png_whitelist(self):
+        pngs = sorted(p.relative_to(self.out).as_posix() for p in self.out.rglob("*.png"))
+        self.assertEqual(pngs, ["assets/brand/og-mahjong-caravan.png", "assets/brand/og-tile-swap-puzzle.png",
+                                "assets/brand/og-water-sort.png", "assets/brand/og.png",
+                                "assets/media/water-sort/mask.png"])
+
+    def test_size_budget(self):
+        self.assertLess(total_size(self.out), 15 * 1024 * 1024)
 
 
 class GuardTest(unittest.TestCase):

@@ -233,7 +233,7 @@ body.legal-page .top { background: var(--bg); color: var(--fg); border-bottom: 0
 html[data-lang="tr"] .legal-switch a[href="#tr"],
 html[data-lang="en"] .legal-switch a[href="#en"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 
-.legal { padding: clamp(32px, 6vw, 72px) var(--gutter) 64px; color: #1d1a16; }
+.legal { padding: clamp(32px, 6vw, 72px) var(--gutter) 64px; color: #1d1a16; overflow-wrap: anywhere; }
 .legal section { max-width: 72ch; }
 .legal section + section { margin-top: 72px; padding-top: 48px; border-top: 1.5px solid var(--ink); }
 html[data-lang="tr"] .legal-en, html[data-lang="en"] .legal-tr { display: none; }

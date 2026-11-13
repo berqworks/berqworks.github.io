@@ -61,6 +61,11 @@ class LegalTest(unittest.TestCase):
                     if ".legal-en" in sel or ".legal-tr" in sel:
                         self.assertTrue(sel.strip().startswith("html[data-lang="), sel)
 
+    def test_long_words_wrap_on_phones(self):
+        # e.g. DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION overflowed a 360px screen
+        compact = re.sub(r"\s+", "", CSS)
+        self.assertRegex(compact, r"\.legal(code)?[^{}]*\{[^}]*overflow-wrap:anywhere")
+
     def test_all_required_paths_built(self):
         with tempfile.TemporaryDirectory() as d:
             out = Path(d) / "public"
