@@ -59,6 +59,9 @@ def build(root: Path, out: Path) -> None:
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(root / "site" / "root", out)
+    for folder in ("css", "js", "assets"):
+        shutil.copytree(root / "site" / folder, out / folder,
+                        ignore=shutil.ignore_patterns("manifest.json", ".DS_Store"))
     _render_pages(root, out)
     problems = [f"missing: {p}" for p in missing_required(out)]
     problems += [f"forbidden name in: {p}" for p in forbidden_hits(out)]
