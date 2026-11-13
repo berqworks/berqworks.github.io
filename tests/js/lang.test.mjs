@@ -30,3 +30,16 @@ test("no redirect on Turkish pages, legal pages or non-Turkish browsers", () => 
   assert.equal(shouldRedirect("/games/water-sort/privacy-policy.html", null, "tr"), null);
   assert.equal(shouldRedirect("/", null, "en-GB"), null);
 });
+
+test("an anchor inside a language section keeps that language", () => {
+  // EN terms link to #third-party-notices (no en- prefix); target sits in the lang="en" section.
+  assert.equal(pickLang("#third-party-notices", "tr", "tr-TR", "en"), "en");
+  assert.equal(pickLang("#tr-7", "en", "en-US", "tr"), "tr");
+});
+
+test("navigation inside the site never redirects (storage may be blocked)", () => {
+  const origin = "https://berqworks.com";
+  assert.equal(shouldRedirect("/", null, "tr-TR", origin + "/tr/", origin), null);
+  assert.equal(shouldRedirect("/", null, "tr-TR", "https://www.google.com/", origin), "/tr/");
+  assert.equal(shouldRedirect("/", null, "tr-TR", "", origin), "/tr/");
+});

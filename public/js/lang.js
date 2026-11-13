@@ -2,7 +2,9 @@
 
 const KEY = "bw-lang";
 
-export function pickLang(hash, stored, navLang) {
+// targetLang: lang of the section holding the #hash target, when the page has one.
+export function pickLang(hash, stored, navLang, targetLang = null) {
+  if (targetLang === "tr" || targetLang === "en") return targetLang;
   const h = (hash || "").replace(/^#/, "");
   if (h === "tr" || h.startsWith("tr-")) return "tr";
   if (h === "en" || h.startsWith("en-")) return "en";
@@ -10,8 +12,11 @@ export function pickLang(hash, stored, navLang) {
   return (navLang || "").toLowerCase().startsWith("tr") ? "tr" : "en";
 }
 
-export function shouldRedirect(pathname, stored, navLang) {
+// referrer/origin: moves within the site never redirect, so the EN switch works
+// even when localStorage is blocked and no choice can be stored.
+export function shouldRedirect(pathname, stored, navLang, referrer = "", origin = "") {
   if (stored !== null) return null;
+  if (origin && referrer && referrer.startsWith(origin + "/")) return null;
   if (!(navLang || "").toLowerCase().startsWith("tr")) return null;
   if (pathname.startsWith("/tr/") || pathname.endsWith(".html")) return null;
   return "/tr" + pathname;
@@ -31,7 +36,10 @@ function init() {
 
   if (root.hasAttribute("data-legal")) {
     const apply = () => {
-      const lang = pickLang(location.hash, readStored(), nav);
+      let target = null;
+      try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { /* bad hash */ }
+      const holder = target && target.closest("section[lang]");
+      const lang = pickLang(location.hash, readStored(), nav, holder ? holder.lang : null);
       root.dataset.lang = lang;
       root.lang = lang;
     };
@@ -42,7 +50,7 @@ function init() {
     return;
   }
 
-  const target = shouldRedirect(location.pathname, readStored(), nav);
+  const target = shouldRedirect(location.pathname, readStored(), nav, document.referrer, location.origin);
   if (target) {
     location.replace(target + location.hash);
     return;
