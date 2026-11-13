@@ -25,7 +25,7 @@ Hedef olmayanlar:
 Kaçınılacaklar (site teknik olarak çalışsa bile bunlar başarısızlık sayılır):
 
 - Sitenin yapay zekâ işi ya da hazır şablon gibi görünmesi: ortalanmış degrade "hero", eş kartlardan ızgara, hazır ikon setleri, emoji süsleme, mor-mavi degradeler, her bölüme aynı kalıp.
-- "geliştiricinin adı" adının sitenin herhangi bir yerinde geçmesi (metin, meta etiket, alt metin, dosya adı).
+- Geliştiricinin kişisel adının sitenin herhangi bir yerinde geçmesi (metin, meta etiket, alt metin, dosya adı).
 - Eski siteyi referans almak. Tek kaynak `~/Desktop/site-gerekli-dosyalar/{mahjong,tile-swap-puzzle,water-sort}`; her klasördeki `brief.md` metinlerin ve sayıların doğruluk kaynağıdır. `_eski-repo-yedek/` yalnızca kurtarma içindir, kullanılmaz.
 - Tile Swap'ın yapay zekâ ile üretilmiş yapboz resimlerini ve kategori kapaklarını (`art/puzzle-images/`, `art/category-covers/`) ayrı dosyalar olarak sitede süs ya da vitrin öğesi yapmak. Oyunun ekran görüntüleri ve videoları ise (içlerinde bu resimler görünse de) Tile Swap sayfasında diğer oyunlardaki gibi kullanılır (kullanıcının kararı). Öne çıkanlar bölümündeki yer değiştirme hareketi de bu resimlerden biriyle yapılabilir; ana sayfa ve stüdyo bölümünde bu resimler yer almaz.
 - Yasal adreslerden birinin kırılması.

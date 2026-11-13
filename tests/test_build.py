@@ -5,7 +5,8 @@ from pathlib import Path
 
 from _helpers import ROOT, SOURCE  # noqa: F401  (sets sys.path)
 from sitegen import urls
-from sitegen.build import REQUIRED_PATHS, build, forbidden_hits, missing_required, total_size
+from sitegen.build import (REQUIRED_PATHS, build, forbidden_hits, load_forbidden_names, missing_required,
+                           total_size)
 
 EXPECTED = {
     "games/water-sort/privacy-policy.html", "games/water-sort/terms-of-use.html", "games/water-sort/kvkk.html",
@@ -43,7 +44,7 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(missing_required(self.out), [])
 
     def test_build_output_has_no_forbidden_name(self):
-        self.assertEqual(forbidden_hits(self.out), [])
+        self.assertEqual(forbidden_hits(self.out, load_forbidden_names(ROOT)), [])
 
     def test_sitemap(self):
         xml = (self.out / "sitemap.xml").read_text(encoding="utf-8")
@@ -81,15 +82,27 @@ class GuardTest(unittest.TestCase):
             self.assertEqual(len(missing_required(Path(d))), 15)
 
     def test_forbidden_hits(self):
+        # The real name lives only in the git-ignored .forbidden-names; tests use a made-up one.
         with tempfile.TemporaryDirectory() as d:
             p = Path(d)
             (p / "x.html").write_text("Merhaba Zeynep", encoding="utf-8")
             (p / "y.html").write_text("berqworks BerqWorks", encoding="utf-8")
-            (p / "z.txt").write_text("Seher Hatipoğlu", encoding="utf-8")
-            hits = forbidden_hits(p)
+            (p / "z.txt").write_text("Zeynepçik", encoding="utf-8")
+            hits = forbidden_hits(p, ["Zeynep"])
             self.assertIn("x.html", hits)
             self.assertNotIn("y.html", hits)
-            self.assertNotIn("z.txt", hits)  # data controller named in legal texts
+            self.assertNotIn("z.txt", hits)  # whole words only
+            self.assertEqual(forbidden_hits(p, []), [])
+
+    def test_load_forbidden_names(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            self.assertEqual(load_forbidden_names(root), [])
+            (root / ".forbidden-names").write_text("# comment\nZeynep\n\nAli Veli\n", encoding="utf-8")
+            self.assertEqual(load_forbidden_names(root), ["Zeynep", "Ali Veli"])
+
+    def test_forbidden_names_file_is_git_ignored(self):
+        self.assertIn(".forbidden-names", (ROOT / ".gitignore").read_text(encoding="utf-8").split())
 
     def test_urls(self):
         self.assertEqual(urls.game_path("tr", "water-sort"), "/tr/games/water-sort/")

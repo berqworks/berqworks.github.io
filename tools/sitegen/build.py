@@ -25,7 +25,17 @@ REQUIRED_PATHS = (
 )
 
 TEXT_SUFFIXES = {".html", ".css", ".js", ".mjs", ".json", ".txt", ".xml", ".svg"}
-FORBIDDEN = re.compile(r"\bBerk\b")
+# Names that must never appear in the built site. Kept out of the repo on purpose:
+# one name per line in the git-ignored file .forbidden-names at the repo root.
+FORBIDDEN_FILE = ".forbidden-names"
+
+
+def load_forbidden_names(root: Path) -> list[str]:
+    path = root / FORBIDDEN_FILE
+    if not path.is_file():
+        return []
+    lines = (line.strip() for line in path.read_text(encoding="utf-8").splitlines())
+    return [line for line in lines if line and not line.startswith("#")]
 
 
 def write(out: Path, rel: str, text: str) -> None:
@@ -38,11 +48,14 @@ def missing_required(out: Path) -> list[str]:
     return [p for p in REQUIRED_PATHS if not (out / p).is_file()]
 
 
-def forbidden_hits(out: Path) -> list[str]:
+def forbidden_hits(out: Path, names: list[str]) -> list[str]:
+    if not names:
+        return []
+    pattern = re.compile(r"\b(" + "|".join(map(re.escape, names)) + r")\b")
     hits = []
     for f in sorted(out.rglob("*")):
         if f.is_file() and f.suffix in TEXT_SUFFIXES:
-            if FORBIDDEN.search(f.read_text(encoding="utf-8", errors="ignore")):
+            if pattern.search(f.read_text(encoding="utf-8", errors="ignore")):
                 hits.append(f.relative_to(out).as_posix())
     return hits
 
@@ -66,7 +79,10 @@ def build(root: Path, out: Path) -> None:
                         ignore=shutil.ignore_patterns("manifest.json", ".DS_Store"))
     _render_pages(root, out)
     problems = [f"missing: {p}" for p in missing_required(out)]
-    problems += [f"forbidden name in: {p}" for p in forbidden_hits(out)]
+    names = load_forbidden_names(root)
+    if not names:
+        print(f"warning: {FORBIDDEN_FILE} not found, name check skipped")
+    problems += [f"forbidden name in: {p}" for p in forbidden_hits(out, names)]
     if problems:
         print("\n".join(problems))
         raise SystemExit(1)

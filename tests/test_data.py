@@ -3,6 +3,7 @@ import re
 import unittest
 
 from _helpers import ROOT
+from sitegen.build import load_forbidden_names
 from sitegen.data import load_site, t, validate
 
 
@@ -35,8 +36,12 @@ class DataTest(unittest.TestCase):
         self.assertTrue(any("tile-swap-puzzle" in e and "card" in e for e in errors), errors)
 
     def test_no_forbidden_name(self):
+        names = load_forbidden_names(ROOT)
+        if not names:
+            self.skipTest(".forbidden-names not present on this machine")
+        pattern = re.compile(r"\b(" + "|".join(map(re.escape, names)) + r")\b")
         for s in _strings(self.site):
-            self.assertIsNone(re.search(r"\bBerk\b", s), s)
+            self.assertIsNone(pattern.search(s), s)
 
     def test_no_prices(self):
         for s in _strings(self.site):

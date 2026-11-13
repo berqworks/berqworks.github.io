@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - Tek içerik kaynağı `~/Desktop/site-gerekli-dosyalar/{mahjong,tile-swap-puzzle,water-sort}` ve oradaki `brief.md`'ler. `_eski-repo-yedek/` açılmaz. Eski site referans alınmaz.
-- "geliştiricinin adı" adı (ve tek başına "Zeynep" kelimesi) `public/` içinde hiçbir yerde geçmez.
+- Geliştiricinin kişisel adı `public/` içinde hiçbir yerde geçmez. Aranacak adlar repoda değil, git'e girmeyen yerel `.forbidden-names` dosyasındadır.
 - Fiyat rakamı, Play bağlantısı, çıkış tarihi yok. Durum: üç oyun da "Coming soon" / "Yakında".
 - Analitik, çerez, üçüncü taraf istek yok; fontlar dahil her şey `public/` içinden yüklenir.
 - Bütün CSS'te `font-variant-ligatures: none`; her sayfada doğru `lang` (`en` / `tr`).
@@ -91,7 +91,7 @@ Testler: `python3 -m unittest discover -s tests -v` ve `node --test tests/js/`.
   - `sitegen.build.REQUIRED_PATHS: tuple[str, ...]` (aşağıdaki 15 yol)
   - `sitegen.build.build(root: Path, out: Path) -> None` (çıktıyı silip yeniden üretir; sonraki görevler render çağrılarını buraya ekler)
   - `sitegen.build.missing_required(out: Path) -> list[str]`
-  - `sitegen.build.forbidden_hits(out: Path) -> list[str]` (`\bBerk\b` ya da `Hatipoğlu` içeren metin dosyalarının yolları; `.html .css .js .json .txt .xml`)
+  - `sitegen.build.forbidden_hits(out: Path) -> list[str]` (`.forbidden-names` içindeki adlardan birini tam kelime olarak içeren metin dosyalarının yolları; `.html .css .js .json .txt .xml`)
   - `sitegen.build.total_size(out: Path) -> int`
   - `build()` sonunda `missing_required` ya da `forbidden_hits` boş değilse `SystemExit(1)` ile durur.
 
@@ -128,7 +128,7 @@ Testler:
 - `test_required_paths_exact`: `set(REQUIRED_PATHS) == EXPECTED`.
 - `test_passthrough_byte_identical`: geçici klasöre `build()` sonra `public/games/water-sort/config.json` baytları `site/root/...` ile ve `~/Desktop/site-gerekli-dosyalar/water-sort/config.json` ile aynı (kaynak yoksa bu ikinci karşılaştırmayı atla); `app-ads.txt` içeriği `pub-3762683248469893` içerir.
 - `test_missing_required_lists_absent`: boş klasörde `missing_required` 15 yol döndürür.
-- `test_forbidden_hits`: `Merhaba Zeynep` yazan geçici `x.html` yakalanır; `berqworks` yazan dosya yakalanmaz.
+- `test_forbidden_hits`: uydurma bir adla (`Merhaba Zeynep`) yazılmış geçici `x.html` yakalanır; `berqworks` yazan dosya yakalanmaz.
 - `test_urls`: `game_path("tr","water-sort") == "/tr/games/water-sort/"`, `home_path("en") == "/"`, `legal_path("water-sort","kvkk") == "/games/water-sort/kvkk.html"`.
 
 Bu görevde sayfa üreticileri henüz yok; `build()` şimdilik `site/root/` içeriğini kopyalar ve geçici olarak boş bir `index.html` yazar. Bu yüzden `missing_required` testini build sonrası değil, boş klasörde yap.
@@ -197,7 +197,7 @@ Temalar (spec §5): Mahjong `bg #1f5a3e, bg2 null, fg #f5efe0, accent #e0a63a`; 
 
 `legal_docs`: Mahjong `["privacy-policy","terms-of-use","kvkk"]`, Tile Swap `["privacy-policy","terms-of-use"]`, Water Sort `["privacy-policy","terms-of-use","kvkk"]`. Water Sort'ta ayrıca `legal_version: 1`.
 
-- [ ] **Step 1: Başarısız testleri yaz** (`tests/test_data.py`): `load_site` üç oyunu `["mahjong-caravan","tile-swap-puzzle","water-sort"]` sırasıyla döndürür; `validate(load_site(root)) == []`; bir oyunun `card.tr`'si silinince `validate` o alanı adlandıran bir hata döndürür; hiçbir metin alanında `Zeynep` geçmez; hiçbir metin alanında `₺`, `$` ya da `USD` geçmez; her oyunun `media` alanı Task 3'e kadar boş olabilir (`validate` medya dosyalarının varlığını yalnızca `media` doluysa denetler).
+- [ ] **Step 1: Başarısız testleri yaz** (`tests/test_data.py`): `load_site` üç oyunu `["mahjong-caravan","tile-swap-puzzle","water-sort"]` sırasıyla döndürür; `validate(load_site(root)) == []`; bir oyunun `card.tr`'si silinince `validate` o alanı adlandıran bir hata döndürür; hiçbir metin alanında `.forbidden-names` içindeki bir ad geçmez; hiçbir metin alanında `₺`, `$` ya da `USD` geçmez; her oyunun `media` alanı Task 3'e kadar boş olabilir (`validate` medya dosyalarının varlığını yalnızca `media` doluysa denetler).
 - [ ] **Step 2: Çalıştır, FAIL gör.** `python3 -m unittest tests.test_data -v`
 - [ ] **Step 3: JSON dosyalarını ve `data.py`'yi yaz.** Metinler brief'lerden birebir kopyalanır; brief §11'deki düzeltmeler (Mahjong yaşı vb.) yukarıdaki tabloda zaten uygulanmıştır.
 - [ ] **Step 4: Çalıştır, PASS gör.**
