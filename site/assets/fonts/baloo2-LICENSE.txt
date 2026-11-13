@@ -1,0 +1,12 @@
+Baloo 2 SemiBold (Baloo2-SemiBold.ttf), version 1.700
+
+The game repo does not ship a separate license file for this font. The lines
+below are copied from the font file's own metadata (name table):
+
+  Copyright 2019 The Baloo 2 Project Authors (https://github.com/EkType/Baloo2)
+  Designer: Sarang Kulkarni and Ek Type (www.ektype.in)
+  This Font Software is licensed under the SIL Open Font License, Version 1.1.
+  This license is available with a FAQ at: http://scripts.sil.org/OFL
+
+Full OFL 1.1 text: https://openfontlicense.org/open-font-license-official-text/
+Upstream repository (includes OFL.txt): https://github.com/EkType/Baloo2
